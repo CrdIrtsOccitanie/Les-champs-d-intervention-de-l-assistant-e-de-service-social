@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Les champs d’intervention de l’assistant(e) de service social</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f6f4ef;--card:#fff;--tx:#23262b;--mu:#5d6470;--ac:#1f6f6b;--ac2:#e3f1ef;--bd:#dcd8cf;--qt:#fff6e0}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#16191d;--card:#1f2328;--tx:#ecebe6;--mu:#a3a9b2;--ac:#6cc4bd;--ac2:#22393a;--bd:#363b42;--qt:#2f2a1a}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#16191d;--card:#1f2328;--tx:#ecebe6;--mu:#a3a9b2;--ac:#6cc4bd;--ac2:#22393a;--bd:#363b42;--qt:#2f2a1a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:1000px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:1.6rem;line-height:1.2;margin:.2em 0}
+.lead{color:var(--mu);max-width:70ch}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 6px;align-items:center}
+.chip{border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:7px 13px;border-radius:99px;font:inherit;font-size:.9rem;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ac);color:var(--bg);border-color:var(--ac)}
+.prog{color:var(--mu);font-size:.9rem;margin:4px 0 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;text-align:left;font:inherit;color:inherit;cursor:pointer;display:flex;flex-direction:column;gap:6px;position:relative}
+.card:hover,.card:focus-visible{border-color:var(--ac);outline:none}
+.ico{width:56px;height:56px;border-radius:16px;background:var(--ac2);display:grid;place-items:center;font-size:30px}
+.card h2{font-size:1.02rem;margin:4px 0 0;line-height:1.25}
+.card p{margin:0;color:var(--mu);font-size:.9rem}
+.tag{font-size:.75rem;color:var(--ac);font-weight:600}
+.seen{position:absolute;top:10px;right:12px;color:var(--ac);font-weight:700}
+dialog{border:1px solid var(--bd);border-radius:16px;background:var(--card);color:var(--tx);max-width:640px;width:calc(100% - 24px);padding:0;max-height:88vh}
+dialog::backdrop{background:rgba(0,0,0,.5)}
+.dh{display:flex;gap:14px;align-items:center;padding:18px 18px 8px}
+.dh h2{margin:0;font-size:1.2rem;line-height:1.25;flex:1}
+.x{border:0;background:var(--ac2);color:var(--tx);border-radius:50%;width:36px;height:36px;font-size:1.1rem;cursor:pointer}
+.db{padding:4px 18px 18px}
+.db h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ac);margin:16px 0 4px}
+.db ul{margin:0;padding-left:20px}
+.key{background:var(--ac2);border-radius:10px;padding:10px 12px}
+.qt{background:var(--qt);border-left:4px solid var(--ac);border-radius:8px;padding:10px 12px}
+.qt b{display:block;font-size:.85rem;margin-bottom:2px}
+.none{color:var(--mu);font-style:italic}
+.stage{margin-top:28px;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px 18px}
+.stage h2{font-size:1.05rem;margin:0 0 6px}
+.src{margin-top:28px;border-top:1px solid var(--bd);padding-top:14px;font-size:.92rem}
+.src h2{font-size:1rem;margin:0 0 6px}
+.ref{padding-left:2em;text-indent:-2em;margin:6px 0}
+.note{color:var(--mu);font-size:.82rem}
+a{color:var(--ac)}
+.lex{padding-left:20px}.lex li{margin:4px 0;font-size:.93rem}
+.key .note{margin-top:4px}
+</style>
+</head>
+<body>
+<main>
+<h1>Les champs d’intervention de l’assistant(e) de service social</h1>
+<p class="lead">Avant ton stage, découvre où exercent les assistants de service social. Clique sur un champ pour voir ses missions, un chiffre clé et le témoignage d’un professionnel.</p>
+<div class="bar" id="bar" role="group" aria-label="Filtrer les champs"></div>
+<div class="prog" id="prog"></div>
+<div class="grid" id="grid"></div>
+
+<section class="stage">
+<h2>Trois questions à te poser en arrivant en stage</h2>
+<ul>
+<li>Quel est le cadre institutionnel du service (employeur, textes, public concerné) ?</li>
+<li>Qui sont les partenaires du service et comment travaille-t-on avec eux ?</li>
+<li>Comment le secret professionnel s’applique-t-il dans les échanges d’informations ?</li>
+</ul>
+</section>
+
+<section class="src">
+<h2>Source</h2>
+<p>Cette application a été construite à partir du chapitre 5, « Champs d’intervention », de l’ouvrage suivant. Les témoignages sont résumés et reformulés.</p>
+<p class="ref">Bouquet, B., & Garcette, C. (2014). <i>Profession : assistante de service social</i>. Maloine.</p>
+<p class="note">ISBN 978-2-224-03417-7</p>
+<p class="note">Chiffres clés et textes actualisés en octobre 2026 à partir des sources citées dans chaque fiche. Les effectifs de l’ouvrage (environ 2013) restent indiqués pour comparaison. Les liens vers les codes renvoient à Légifrance : les numéros d’articles sont à consulter dans chaque code.</p>
+<h2 style="margin-top:16px">Références complémentaires (APA 7)</h2>
+<div id="refs"></div>
+<h2 style="margin-top:16px">Textes communs à tous les champs</h2>
+<ul class="lex">
+<li><a href="https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006074069" target="_blank" rel="noopener">Code de l’action sociale et des familles, art. L. 411-1 à L. 411-6</a> : profession réglementée, titre protégé, secret professionnel (L. 411-3)</li>
+<li><a href="https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006070719" target="_blank" rel="noopener">Code pénal, art. 226-13 et 226-14</a> : secret professionnel et dérogations</li>
+<li><a href="https://www.francecompetences.fr/recherche/rncp/37675/" target="_blank" rel="noopener">France compétences, fiche RNCP37675</a> : diplôme d’État d’assistant de service social</li>
+</ul>
+</section>
+</main>
+
+<dialog id="dlg" aria-labelledby="dt">
+<div class="dh"><div class="ico" id="di"></div><h2 id="dt"></h2><button class="x" id="dx" aria-label="Fermer">✕</button></div>
+<div class="db" id="dbody"></div>
+</dialog>
+
+<script>
+const CATS={all:"Tous",tem:"Avec témoignage",fam:"Enfance et famille",sante:"Santé",educ:"Éducation",terr:"Territoire et hébergement",trav:"Emploi et institutions"};
+const D=[
+{e:"🏘️",t:"Service social de secteur (polyvalence)",c:"terr",b:"Porte d’entrée du service social départemental : il accueille toute personne en difficulté sur un territoire donné.",p:"Habitants d’un secteur géographique, tous âges et toutes situations.",m:["Accueil, écoute, évaluation de la situation","Information, orientation, accompagnement social","Aide à l’insertion et protection des enfants et des personnes vulnérables"],k:"Plus de 40 000 assistants de service social en 2002, tous employeurs confondus.",w:["Christine, Loire-Atlantique","Après une trentaine d’années, elle voit dans la polyvalence une richesse : chaque personne apporte une histoire singulière, et l’essentiel est d’aborder la situation dans sa globalité."]},
+{e:"👨‍👩‍👧",t:"Caisses d’allocations familiales (CAF)",c:"fam",b:"Le service social de la branche famille accompagne les familles lors d’événements qui fragilisent leur vie quotidienne.",p:"Familles, notamment monoparentales ou menacées d’expulsion.",m:["Soutien lors de séparation, divorce, décès","Prévention des impayés de loyer et de l’habitat indigne","Appui à l’insertion des parents isolés"],k:"102 CAF versent des prestations à 11,5 millions d’allocataires.",w:null},
+{e:"🩺",t:"Assurance maladie (CARSAT, CRAM, CPAM)",c:"sante",b:"Le service social de la Sécurité sociale aide les assurés malades ou handicapés à accéder aux soins et à garder leur place dans la vie sociale.",p:"Assurés fragilisés par la maladie, le handicap ou la perte d’autonomie.",m:["Accès aux soins et aux droits","Prévention de la désinsertion professionnelle","Accompagnement individuel et actions collectives"],k:"Le régime général couvre près de 85 % de la population.",w:["Blaisette, CRAMIF","Elle suit une femme malade qui sort d’hospitalisation : ouverture de droits, indemnités journalières, demande de pension d’invalidité et aide à domicile se mettent en place pas à pas."]},
+{e:"🌾",t:"Mutualité sociale agricole (MSA)",c:"terr",b:"Le service social de la MSA accompagne les exploitants et salariés agricoles, avec une approche de développement social local.",p:"Agriculteurs, salariés agricoles, habitants du milieu rural.",m:["Actions individuelles auprès des ressortissants","Actions collectives et développement local","Lutte contre l’isolement en milieu rural"],k:"5,6 millions de personnes protégées par le régime agricole en 2011.",w:null},
+{e:"🎒",t:"Éducation nationale (élèves)",c:"educ",b:"Dans les collèges et lycées, l’assistant(e) de service social agit pour la réussite scolaire et la protection des élèves.",p:"Élèves du second degré et leurs familles.",m:["Prévention du décrochage et de l’absentéisme","Protection des mineurs en danger","Actions collectives : violences, harcèlement, santé"],k:"2 726 assistants de service social en 2012 ; environ 1 pour 1 660 élèves.",w:["Vanessa, Seine-Saint-Denis","Elle cherche des aides pour financer l’internat d’un jeune et mène aussi des actions collectives avec les enseignants sur les violences ou les relations filles-garçons."]},
+{e:"🎓",t:"Service social des étudiants (CROUS)",c:"educ",b:"Il aide les étudiants à construire leur projet d’études malgré les difficultés matérielles ou personnelles.",p:"Étudiants de l’enseignement supérieur.",m:["Aide à l’organisation matérielle (logement, bourses)","Aides d’urgence ponctuelles ou annuelles","Orientation vers les services spécialisés"],k:"Deux aides spécifiques : l’aide d’urgence ponctuelle et l’aide d’urgence annuelle.",w:null},
+{e:"🏥",t:"Service social hospitalier",c:"sante",b:"Présent dans les hôpitaux depuis 1914, il prépare la sortie et assure la continuité de la prise en charge des patients.",p:"Patients hospitalisés ou suivis en consultation, familles, personnes vulnérables.",m:["Accès aux droits et aux soins","Accompagnement de la sortie d’hospitalisation","Protection des adultes, mineurs et victimes de violence"],k:"Créé à l’Hôpital des Enfants malades en 1914.",w:["Service social hospitalier, Seine-Saint-Denis","Deux situations : un homme désorienté dont le retour au domicile est impossible, et une femme enceinte isolée accompagnée jusqu’à l’accouchement puis vers un logement."]},
+{e:"🧠",t:"Service social en psychiatrie",c:"sante",b:"L’assistant(e) de service social travaille au sein d’une équipe pluridisciplinaire de santé mentale et fait le lien avec le milieu de vie.",p:"Patients en souffrance psychique, leur entourage, enfants et adolescents en CMP.",m:["Diagnostic social complémentaire du diagnostic médical","Lien avec famille, école, MDPH, ASE","Recherche de solutions alternatives à l’hospitalisation"],k:"Une formation d’adaptation à la fonction reste souvent nécessaire.",w:["Iris, CMP Seine-Saint-Denis","Elle reçoit les parents, travaille avec l’école et la MDPH et participe à un projet personnalisé pour chaque enfant avec l’équipe."]},
+{e:"🏭",t:"Service social du travail",c:"trav",b:"Interface entre salariés, employeur et partenaires : il prévient les difficultés qui touchent la vie au travail.",p:"Salariés d’entreprises et leurs familles.",m:["Bien-être du travailleur et adaptation au poste","Accompagnement des changements (reclassement, plan social)","Prévention des risques psychosociaux"],k:"Plus de 3 500 assistants de service social du travail ; environ 5 000 entreprises concernées.",w:["Alice, région parisienne","Face à un salarié de retour après un long arrêt, elle l’informe, l’écoute et cherche avec lui et l’entreprise un reclassement possible."]},
+{e:"🧒",t:"Aide sociale à l’enfance (ASE)",c:"fam",b:"Le service de protection de l’enfance accompagne les familles et protège les mineurs en danger, sous l’autorité du président du conseil général.",p:"Mineurs en danger ou en risque de danger, jeunes majeurs de moins de 21 ans, parents.",m:["Prévention et évaluation des situations de danger","Accompagnement éducatif à domicile ou accueil","Suivi des placements et des liens parents-enfant"],k:"297 000 mesures en 2011, réparties à parts égales entre mesures éducatives et placements.",w:["Guillaume, Haute-Normandie","Il suit des enfants placés, prépare avec eux et leurs parents les visites et veille à restituer la parole de chacun dans le projet pour l’enfant."]},
+{e:"🎖️",t:"Service social des armées",c:"trav",b:"Il soutient les personnels civils et militaires de la Défense ainsi que leurs familles.",p:"Militaires, personnels civils de la Défense, retraités, familles.",m:["Aide matérielle et soutien psychosocial","Accompagnement lors des mobilités et opérations","Participation à la prévention des risques sociaux"],k:"651 conseillers techniques et assistants de service social.",w:null},
+{e:"🏠",t:"Établissements sanitaires et sociaux",c:"terr",b:"Dans les MECS, centres d’hébergement (CHRS), foyers ou EHPAD, l’assistant(e) veille aux liens sociaux et familiaux et prépare la sortie.",p:"Enfants placés, adultes sans domicile, personnes âgées ou handicapées.",m:["Accueil et suivi des personnes hébergées","Maintien des liens familiaux et sociaux","Préparation de la sortie de l’établissement"],k:"1 600 CHRS en 2010 ; près de 500 000 personnes prises en charge chaque année.",w:["Cyrielle, centre d’hébergement, Val-de-Marne","Entre petits gestes du quotidien, entretiens et réunions d’équipe, elle accompagne chaque personne vers un projet de vie, en se questionnant sans cesse."]},
+{e:"🤝",t:"Centres sociaux",c:"terr",b:"Équipement de proximité ouvert à tous les habitants, il favorise le lien social et le développement local.",p:"Habitants d’un quartier ou d’un territoire, toutes générations.",m:["Accueil, animation, activités et services","Soutien aux initiatives des habitants","Projets avec les partenaires du territoire"],k:"2 028 centres sociaux en France.",w:null},
+{e:"🚓",t:"Commissariat et gendarmerie",c:"trav",b:"Créé dans les années 1980, ce poste offre aux personnes en détresse une écoute et une orientation hors cadre judiciaire.",p:"Victimes, personnes en détresse reçues par les forces de l’ordre.",m:["Écoute rapide et évaluation de la situation","Orientation vers les services sociaux","Relais avec la police ou la gendarmerie"],k:"Environ 180 postes en 2012, avec un objectif de doublement d’ici 2017.",w:["Laurent, Hérault","Il explique avoir dû réinterroger ses pratiques dans ce cadre contraint, avec le contact téléphonique, une écoute différente et une vigilance sur le secret professionnel."]},
+{e:"💼",t:"Service social en libéral",c:"trav",b:"Pratique rare en France : l’assistant(e) réalise des prestations pour des institutions, entreprises ou tribunaux.",p:"Institutions, entreprises, juridictions et particuliers.",m:["Enquêtes sociales","Prestations sous forme de conventions","Actions ponctuelles"],k:"Une association (ARTSI) créée en 1999 regroupe environ 50 libéraux.",w:null}
+];
+const C={casf:"https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006074069",css:"https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006073189",csp:"https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006072665",trav:"https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006072050",educ:"https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006071191",rural:"https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006071367",pen:"https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006070719"};
+const E=(t,y,m,d,n)=>"https://www.legifrance.gouv.fr/eli/"+t+"/"+y+"/"+m+"/"+d+"/"+y+"-"+n+"/jo/texte";
+const PE=["Loi n° 2023-1196 du 18 décembre 2023 pour le plein emploi (RSA, contrat d’engagement)",E("loi",2023,12,18,1196)];
+const QE="https://www.assemblee-nationale.fr/dyn/17/questions/QANR5L17QE14293";
+const X=[
+{k:"117 000 assistants de service social et conseillers en économie sociale et familiale en 2022 (France hors Mayotte).",s:["DREES, professionnelles du social (mai 2025)","https://drees.solidarites-sante.gouv.fr/communique-de-presse-jeux-de-donnees/jeux-de-donnees/effectifs-et-caracteristiques-des"],l:[["CASF, art. L. 123-2 : service public départemental d’action sociale",C.casf],["CASF, art. L. 411-1 à L. 411-6 : exercice de la profession",C.casf],PE,["Loi n° 2022-217 du 21 février 2022 (« 3DS ») : différenciation et décentralisation",E("loi",2022,2,21,217)]]},
+{k:"13,6 millions d’allocataires et 32 millions de personnes couvertes ; 101 Caf. Depuis mars 2025, déclarations de ressources préremplies pour le RSA et la prime d’activité.",s:["Cnaf, les Caf en chiffres clés (2026)","https://caf.fr/sites/default/files/medias/cnaf/Nous_connaitre/Presse/images/260626%20100X180%20ANNUAIRE%20AJIS.pdf"],l:[["Code de la sécurité sociale (branche famille, Caf)",C.css],["CASF (prestations d’aide sociale, RSA, action sociale)",C.casf],PE,["Convention d’objectifs et de gestion État-Cnaf 2023-2027 (rappelée dans une réponse ministérielle)",QE]]},
+{k:"Pas de chiffre national récent retrouvé : le service social publie chaque année un rapport d’activité sur ameli.fr.",s:["Assurance Maladie, rapports du service social","https://assurance-maladie.ameli.fr/qui-sommes-nous/publications-de-reference/assurance-maladie/rapports-thematiques/rapports-du-service-social"],l:[["Code de la sécurité sociale (CPAM, Carsat, service social)",C.css],["Loi n° 2021-1018 du 2 août 2021 : prévention de la désinsertion professionnelle",E("loi",2021,8,2,1018)],["Loi n° 2016-41 du 26 janvier 2016 de modernisation du système de santé",E("loi",2016,1,26,41)]]},
+{k:"Plus de 5,3 millions de ressortissants au régime agricole au 1er janvier 2025 ; plus de 3 millions de personnes protégées en maladie.",s:["MSA, Les chiffres utiles, édition 2026","https://statistiques.msa.fr/wp-content/uploads/2026/06/CU_2026_BAT-Web.pdf"],l:[["Code rural et de la pêche maritime, livre VII : protection sociale agricole",C.rural],["Code de la sécurité sociale (régimes de sécurité sociale)",C.css]]},
+{k:"Environ 1 assistant de service social pour 2 000 élèves dans le secondaire (estimation syndicale) ; 100 postes annoncés pour la rentrée 2026.",s:["SNASEN-UNSA, baromètre (déc. 2025)","https://dubasque.org/wp-content/uploads/2025/12/20251203_DP_Dossier_Presse_SNASEN_Barometre_v3-1.pdf"],l:[["Circulaire n° 2017-055 du 22 mars 2017 : missions du service social en faveur des élèves","https://www.education.gouv.fr/bo/17/Hebdo12/MENE1709191C.htm"],["Décret n° 2017-1051 du 10 mai 2017 : statut des assistants de service social de l’Éducation nationale",E("decret",2017,5,10,1051)],["Code de l’éducation, art. L. 913-1 : mission de prévention et de protection",C.educ]]},
+{k:"265 000 entretiens sociaux par an dans les Crous (2025).",s:["Ministère de l’Enseignement supérieur, discours du 1er décembre 2025","https://www.enseignementsup-recherche.gouv.fr/fr/discours-de-philippe-baptiste-l-occasion-des-70-ans-du-cnous-100896"],l:[["Circulaire du 3 février 2014 sur le service social des Crous (citée dans le BO n° 3 du 20 janvier 2022)","https://www.education.gouv.fr/bo/22/Hebdo3/MENH2200186C.htm"],["Code de l’éducation, partie législative, livre VIII : vie étudiante",C.educ],["Décret n° 2017-1051 du 10 mai 2017 : statut des assistants de service social",E("decret",2017,5,10,1051)]]},
+{k:"13,6 millions de patients hospitalisés ou en séances en 2024, dans 2 962 établissements de santé.",s:["DREES, Les établissements de santé en 2024 (éd. 2026)","https://drees.solidarites-sante.gouv.fr/publications-communique-de-presse-documents-de-reference/panoramas-de-la-drees/260520-Etablissements-de-sant%C3%A9-en-2024"],l:[["Code de la santé publique, art. L. 6111-1 et suivants : service public hospitalier",C.csp],["Loi n° 2009-879 du 21 juillet 2009 (HPST)",E("loi",2009,7,21,879)],["Loi n° 2016-41 du 26 janvier 2016 de modernisation du système de santé",E("loi",2016,1,26,41)]]},
+{k:"Il n’existe pas de recensement national officiel donnant le nombre exact d’Assistants de Service Social (ASS) spécifiquement affectés dans les services de psychiatrie en France : les données nationales sur les travailleurs sociaux regroupent généralement ces professionnels au sein des effectifs globaux de l’action sociale ou hospitalière, sans isoler de chiffre national pour la seule spécialité psychiatrique. Repère disponible : environ 2,2 millions de patients suivis en psychiatrie dans les établissements de santé (données 2024).",s:["DREES, Les patients suivis en psychiatrie (éd. 2026)","https://drees.solidarites-sante.gouv.fr/sites/default/files/2026-07/ES%202026%20-%20Fiche%2012%20-%20Les%20patients%20suivis%20en%20psychiatrie.pdf"],l:[["Code de la santé publique, art. L. 3211-1 et suivants : soins psychiatriques",C.csp],["Loi n° 2011-803 du 5 juillet 2011 sur les soins psychiatriques",E("loi",2011,7,5,803)],["Loi n° 2013-869 du 27 septembre 2013",E("loi",2013,9,27,869)],["Loi n° 2016-41 du 26 janvier 2016 (projets territoriaux de santé mentale)",E("loi",2016,1,26,41)]]},
+{k:"Pas d’effectif national récent retrouvé (ouvrage : plus de 3 500 assistants de service social du travail).",s:null,l:[["Code du travail, art. L. 4622-1 et suivants : services de prévention et de santé au travail",C.trav],["Loi n° 2021-1018 du 2 août 2021 pour renforcer la prévention en santé au travail",E("loi",2021,8,2,1018)]]},
+{k:"405 500 mesures d’aide sociale à l’enfance fin 2024 ; 11 milliards d’euros dépensés par les départements en 2023.",s:["DREES, L’aide sociale à l’enfance, éd. 2026 (relayé par Santé mentale)","https://www.santementale.fr/2026/06/un-nouveau-rapport-de-la-drees-fait-le-point-sur-laide-sociale-a-lenfance/"],l:[["CASF, art. L. 221-1 et suivants et L. 226-1 et suivants : ASE et protection de l’enfance",C.casf],["Loi n° 2007-293 du 5 mars 2007 réformant la protection de l’enfance",E("loi",2007,3,5,293)],["Loi n° 2016-297 du 14 mars 2016 relative à la protection de l’enfant",E("loi",2016,3,14,297)],["Loi n° 2022-140 du 7 février 2022 relative à la protection des enfants",E("loi",2022,2,7,140)],["Décret n° 2022-1728 du 30 décembre 2022 : référentiel national d’évaluation des situations de danger",E("decret",2022,12,30,1728)],["Circulaire sur les dispositions immédiatement applicables de la loi de 2022","https://onpe.france-enfance-protegee.fr/wp-content/uploads/2024/01/jusf2207619c.pdf"]]},
+{k:"Le ministère des Armées compte 275 000 personnes ; effectif des assistants de service social non retrouvé (ouvrage : 651).",s:["Ministère des Armées, offre d’emploi d’assistant de service social","https://choisirleservicepublic.gouv.fr/offre-emploi/assistant-service-social-reference-DEF_02-00064036/"],l:[["Décret n° 2007-51 du 11 janvier 2007 relatif à l’action sociale du ministère de la défense",E("decret",2007,1,11,51)],["Instruction n° 2025-653 du 3 avril 2025 : organisation du service de l’action sociale des armées","https://prod-site-internet-minarm-admin.cloud.defense.gouv.fr/sites/default/files/bulletin-officiel/Instruction%20N%C2%B0%202025-653%20ARM%20SGA%20DRH-MD%20SCN-ASA%20du%2003%20avril%202025.pdf"],["Charte déontologique des conseillers techniques et assistants de service social des armées","https://prod-site-internet-minarm-admin.cloud.defense.gouv.fr/sites/default/files/sga/8%20CHARTE%20N%C2%B0%201094.pdf"],["Directive ministérielle n° 11467/DEF sur les orientations de l’action sociale","https://www.bo.sga.defense.gouv.fr/texte/signe/26922/MINIST%C3%89RIELLE%20N%C2%B0%C2%A011467/DEF.pdf"]]},
+{k:"Environ 203 000 places d’hébergement généraliste en 2024 (dont près de 52 000 en CHRS).",s:["Cour des comptes, l’hébergement d’urgence (mai 2025)","https://www.vie-publique.fr/files/rapport/pdf/299562.pdf"],l:[["CASF, art. L. 345-1 et suivants : centres d’hébergement et de réinsertion sociale",C.casf],["CASF, art. L. 312-1 : établissements et services sociaux et médico-sociaux",C.casf],["Loi n° 2007-290 du 5 mars 2007 (DALO)",E("loi",2007,3,5,290)],["Loi n° 2022-140 du 7 février 2022 (accueil des enfants protégés)",E("loi",2022,2,7,140)]]},
+{k:"Plus de 2 400 centres sociaux et près de 1 800 espaces de vie sociale en 2025, pour plus de 6 millions d’habitants.",s:["Assemblée nationale, question écrite n° 14293 (2026)",QE],l:[["COG État-Cnaf 2023-2027 : 611 structures nouvelles dont 150 centres sociaux",QE],["CASF (action sociale et animation de la vie sociale)",C.casf]]},
+{k:"481 postes d’intervenants sociaux en commissariat et gendarmerie en 2024 ; objectif de 600 en 2027.",s:["Ministère de l’Intérieur, réponse à la question écrite n° 2102 (juin 2025)","https://www.assemblee-nationale.fr/dyn/17/questions/QANR5L17QE2102.pdf"],l:[["Circulaire du 21 décembre 2006 : cadre de référence des intervenants sociaux (rappelée par la CeA, 2025)","https://www.alsace.eu/delib-cea/12308.5.0.pdf"],["Loi n° 2023-22 du 24 janvier 2023 d’orientation et de programmation du ministère de l’Intérieur (LOPMI)",E("loi",2023,1,24,22)],["Code pénal, art. 226-13 : secret professionnel",C.pen]]},
+{k:"Pratique marginale ; pas de recensement récent retrouvé (ouvrage : environ 50 libéraux).",s:null,l:[["CASF, art. L. 411-1 à L. 411-6 : titre protégé et exercice de la profession",C.casf],["Code pénal, art. 226-13 et 226-14 : secret professionnel",C.pen]]}
+];
+D.forEach((f,i)=>{f.ko=f.k;Object.assign(f,X[i])});
+const SEN="https://www.senat.fr/questions/base/2024/qSEQ240511503.html",UNSA="https://dubasque.org/wp-content/uploads/2025/12/20251203_DP_Dossier_Presse_SNASEN_Barometre_v3-1.pdf",ARM="https://www.defense.gouv.fr/sga/au-service-agents/soutien-aux-blesses/guide-du-blesse/fiches-thematiques/laction-sociale-armees",CSC="https://cs-conseil.fr/service-social-travail-missions-avantages-entreprise/";
+const Y={
+4:{k:"Environ 3 000 assistants de service social pour 12 millions d’élèves, soit 1 pour 4 000 (chiffre cité au Sénat en 2024) ; environ 1 pour 2 000 dans le secondaire (UNSA, déc. 2025).",s:["Sénat, question écrite n° 11503 (2024)",SEN],r:"Rapprochement : les deux ratios sont compatibles, le premier portant sur tous les élèves (écoles comprises), le second sur le seul secondaire. Le ministère ne donne pas d’effectif total dans sa réponse : 19 créations d’emplois à la rentrée 2022, effectifs stables à la rentrée 2023, 148 postes aux concours 2023 pour 99 personnes nommées. Pour comparaison, 2 905 ETP étaient cités en 2022 à l’Assemblée nationale, et 100 postes sont annoncés pour la rentrée 2026 (source syndicale).",ss:[["Sénat. (2024, 20 juin). Situation des assistantes et assistants sociaux de l’éducation nationale (question écrite n° 11503)",SEN],["SNASEN-UNSA Éducation. (2025, 5 décembre). Baromètre métiers 2025 : personnels sociaux",UNSA]]},
+8:{m:["Accompagnement dans les démarches administratives et l’ouverture des droits (CPAM, Caf, RQTH, aides sociales)","Soutien face aux difficultés financières : budget, surendettement, aides d’urgence","Accompagnement logement : accès, maintien, impayés de loyer","Soutien familial et personnel : séparation, garde d’enfants, violences, scolarité des enfants","Santé et maintien dans l’emploi : arrêts de travail, handicap, addictions","Médiation et prévention des risques psychosociaux","Actions collectives de prévention et d’information"],r:"Missions d’après un prestataire privé (CS Conseil), à croiser avec les textes officiels. L’article L. 4631-1 du code du travail (obligation à partir de 250 salariés) est cité par cette source : à vérifier sur Légifrance.",ss:[["CS Conseil. (2025, 1er octobre). Service social du travail : missions et avantages pour l’entreprise",CSC]]},
+10:{k:"531 assistants de service social répartis sur le territoire, dans les unités, les hôpitaux, les cellules d’aide aux blessés et au domicile des ressortissants (fiche ministérielle).",s:["Ministère des Armées, L’action sociale des armées",ARM],m:["Accompagnement social (famille, santé, budget, logement, emploi) des militaires, civils, retraités et familles","Accès au droit commun (Caf, MDPH) et aux prestations ministérielles et interministérielles","Secours et prêts après évaluation, y compris en urgence","Soutien en cas d’absence prolongée du domicile (mission opérationnelle, hospitalisation longue)","Suivi des blessés et de leurs familles avec le commandement et les partenaires (CNMSS, SSA, ONAC-VG)"],r:"Attention : la fiche ministérielle a été mise à jour en 2022 et compte 531 assistants de service social ; l’ouvrage citait 651 conseillers techniques et assistants, deux chiffres qui ne se comparent pas strictement.",ss:[["Ministère des Armées et des Anciens combattants, SGA. (2022, 21 février). L’action sociale des armées",ARM]]}
+};
+Object.keys(Y).forEach(i=>Object.assign(D[i],Y[i]));
+const LEG="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006072050/LEGISCTA000006160793/";
+const Z={
+2:{k:"Plus de 300 000 personnes accompagnées par le service social de l’Assurance Maladie en 2023, avec 2 300 professionnels répartis dans 1 966 accueils ; 3 626 chargés d’intervention sociale dans l’ensemble du régime général.",s:["Cnam, communiqué de presse du 29 mai 2024",null],
+m:["Prévention de la désinsertion professionnelle : bilan de compétences, reconversion, visite de pré-reprise, aménagement de poste, dossier MDPH et RQTH","Facilitation du parcours de soins et levée des freins médico-sociaux (AAH, complémentaire santé solidaire, mobilité, aide à domicile)","Plan d’aide co-construit avec l’assuré, avec son consentement, et suivi dans la durée","Actions collectives (groupes de parole, ateliers) et partenariats : France Travail, Agefiph, Cap emploi, CCAS, PASS"],
+r:"En 2023, 57 % des assurés accompagnés l’étaient pour prévenir la désinsertion professionnelle et 43 % pour faciliter leur parcours de soins ; 51 % étaient des personnes isolées et 92 % se disent satisfaits (échantillon de 3 976 répondants). Plus de 11 500 personnes ont participé à des actions collectives, plus de 3 millions d’euros d’aides ont été versés à 2 400 bénéficiaires, et 42 % des assurés suivis en prévention de la désinsertion ont repris le travail ou sont en formation. Côté régime général, les 3 626 chargés d’intervention sociale (2,6 % des 142 000 agents) travaillent surtout en Caf, puis dans les services sociaux des Carsat ; les Caf comptent 1 650 équivalents temps plein de travail social. Ces deux séries de chiffres ne couvrent pas le même périmètre.",
+ss:[["Caisse nationale de l’Assurance Maladie. (2024, 29 mai). Plus de 300 000 personnes en situation de fragilité médico-sociale ont été accompagnées par le service social de l’Assurance Maladie en 2023 [Communiqué de presse]",null],["Travailleurs sociaux, les mal-aimés de la Sécu ? (2025, 3 avril). Le Media Social",null],["Assurance Maladie, rapports d’activité du service social (ameli)","https://assurance-maladie.ameli.fr/qui-sommes-nous/publications-de-reference/assurance-maladie/rapports-thematiques/rapports-du-service-social"]]},
+8:{k:"102 000 assistants de service social et conseillers en économie sociale et familiale en emploi en 2024 : 13 % travaillent pour une entreprise privée, 38 % pour une association, 23 % pour une collectivité territoriale.",s:["DREES, Caractéristiques et effectifs des professionnels du social en 2024",null],
+l:[["Code du travail, Titre III : Service social du travail (articles L. 4631-1 à L. 4631-2)",LEG],["Code du travail, art. L. 4622-1 et suivants : services de prévention et de santé au travail",C.trav],["Loi n° 2021-1018 du 2 août 2021 pour renforcer la prévention en santé au travail",E("loi",2021,8,2,1018)]],
+r:"Le service social du travail n’est pas isolé dans cette statistique, qui couvre tous les employeurs. Profil des assistants de service social et conseillers en ESF en 2024 : 90 % de femmes, âge moyen de 42 ans, 52 % en CDI et 31 % fonctionnaires. Missions d’après un prestataire privé (CS Conseil), à croiser avec les textes.",
+ss:[["Direction de la recherche, des études, de l’évaluation et des statistiques. (s. d.). Caractéristiques et effectifs des professionnels du social en 2024 [Jeu de données, d’après l’enquête Emploi de l’Insee 2023-2025]",null],["CS Conseil. (2025, 1er octobre). Service social du travail : missions et avantages pour l’entreprise",CSC],["République française. (2026). Code du travail, Titre III : Service social du travail (articles L4631-1 à L4631-2). Légifrance",LEG]]}
+};
+Object.keys(Z).forEach(i=>Object.assign(D[i],Z[i]));
+const RF=[
+["Caisse",`Caisse nationale de l’Assurance Maladie. (2024, 29 mai). <i>Plus de 300 000 personnes en situation de fragilité médico-sociale ont été accompagnées par le service social de l’Assurance Maladie en 2023</i> [Communiqué de presse].`],
+["CS Conseil",`CS Conseil. (2025, 1er octobre). <i>Service social du travail : missions et avantages pour l’entreprise</i>. <a href="https://cs-conseil.fr/service-social-travail-missions-avantages-entreprise/" target="_blank" rel="noopener">https://cs-conseil.fr/service-social-travail-missions-avantages-entreprise/</a>`],
+["Direction",`Direction de la recherche, des études, de l’évaluation et des statistiques. (s. d.). <i>Caractéristiques et effectifs des professionnels du social en 2024</i> [Jeu de données]. DREES.`],
+["Ministère",`Ministère des Armées et des Anciens combattants, Secrétariat général pour l’administration. (2022, 21 février). <i>L’action sociale des armées</i>. <a href="https://www.defense.gouv.fr/sga/au-service-agents/soutien-aux-blesses/guide-du-blesse/fiches-thematiques/laction-sociale-armees" target="_blank" rel="noopener">https://www.defense.gouv.fr/sga/au-service-agents/soutien-aux-blesses/guide-du-blesse/fiches-thematiques/laction-sociale-armees</a>`],
+["République",`République française. (2026). <i>Code du travail, Titre III : Service social du travail (articles L4631-1 à L4631-2)</i>. Légifrance. <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006072050/LEGISCTA000006160793/" target="_blank" rel="noopener">https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006072050/LEGISCTA000006160793/</a>`],
+["Sénat",`Sénat. (2024, 20 juin). <i>Situation des assistantes et assistants sociaux de l’éducation nationale</i> (Question écrite n° 11503, 16e législature). <a href="https://www.senat.fr/questions/base/2024/qSEQ240511503.html" target="_blank" rel="noopener">https://www.senat.fr/questions/base/2024/qSEQ240511503.html</a>`],
+["SNASEN",`SNASEN-UNSA Éducation. (2025, 5 décembre). <i>Baromètre métiers 2025 : personnels sociaux</i> [Dossier de presse]. <a href="https://dubasque.org/wp-content/uploads/2025/12/20251203_DP_Dossier_Presse_SNASEN_Barometre_v3-1.pdf" target="_blank" rel="noopener">https://dubasque.org/wp-content/uploads/2025/12/20251203_DP_Dossier_Presse_SNASEN_Barometre_v3-1.pdf</a>`],
+["Travailleurs",`Travailleurs sociaux, les mal-aimés de la Sécu ? (2025, 3 avril). <i>Le Media Social</i>.`]
+];
+const A=u=>'<a href="'+u+'" target="_blank" rel="noopener">'+u+"</a>";
+const P={
+0:[
+"Chibrac, L., et Cols, M.-P. (2019). Polyvalence de secteur : un modèle qui perdure en s’adaptant ? <i>Vie sociale, 27</i>(3), 247-259. "+A("https://doi.org/10.3917/vsoc.193.0247"),
+"Serveille, S., Rausa, M., et al. (2019). L’assistant de service social de polyvalence : un chef sans baguette, d’un orchestre sans partition. <i>La Revue française de service social, 272</i>(1), 50-55."],
+1:[
+"Caisse d’allocations familiales des Pyrénées-Orientales. (s. d.). <i>Les travailleurs sociaux de la Caf des Pyrénées-Orientales</i>. CAF. "+A("https://www.caf.fr/allocataires/caf-des-pyrenees-orientales/offre-de-service/vie-personnelle/les-travailleurs-sociaux-de-la-caf-des-pyrenees-orientales"),
+"Caisse nationale des allocations familiales. (2022). <i>La branche Famille de la Sécurité sociale</i>. Cnaf. "+A("https://www.caf.fr/sites/default/files/medias/cnaf/Nous_connaitre/qui%20sommes%20nous/CNAF_BFF_2022_BaT%20basse%20def.pdf")],
+2:[
+"Delacroix, M.-P., Fauvel, V., Héricy Asselin, M., et al. (2021). Quand le service social de l’assurance maladie prévient la désinsertion professionnelle. <i>La Revue française de service social, 283</i>, 97-104.",
+"Dellangnol, C. (2015). Les assistantes sociales de la Cramif : messagères des droits. <i>Actualités sociales hebdomadaires (ASH)</i>, (2933), 18-22.",
+"Duval, C., Le Bars, C., & Nicolle, M. (2021). De la force et de la fragilité dans la souffrance au travail. Ce qu’une expérience de travail de groupe enseigne. <i>La Revue française de service social</i>, (282), 88-95.",
+"Fouda Essomba, V. S., & Cramer, R. (2023). Entrée en EHPAD : quel rôle pour les assistants de service social ? Certains préalables ne doivent-ils pas être déterminés en amont ? <i>La Revue française de service social</i>, (291), 82-90.",
+"Ladevèze, S. (2025). Parlons retour à la vie professionnelle postcancer : expérience de travail social avec les groupes. <i>La Revue française de service social</i>, (296), 35-39."],
+3:[
+"Beline, M. (2012). Réalité du travail social en milieu rural. <i>Lien social (Le forum social du jeudi)</i>, (1081), 10-17.",
+"Le Saint, R. (2010). Une travailleuse sociale en milieu rural : la journée d’une AS de campagne. <i>Actualités sociales hebdomadaires (ASH)</i>, (2686), 32-35.",
+"MSA du Languedoc. (2023, 29 juin). <i>Les portraits métiers de la MSA - Assistante sociale</i> [Vidéo]. YouTube. "+A("https://www.youtube.com/watch?v=BGY3SRKt848"),
+"MSA Sécurité sociale agricole. (2026). <i>Sophie, travailleur social en action sanitaire et sociale à la MSA</i> [Vidéo]. YouTube. "+A("https://www.youtube.com/watch?v=2kEP4GtySGY")],
+4:[
+"Académie de Montpellier. (2026). <i>Action sociale</i>. "+A("https://www.ac-montpellier.fr/action-sociale-121562"),
+"Ministère de l’Éducation nationale. (2019, 13 février). <i>Être assistante / assistant de service social en faveur des élèves</i>. "+A("https://www.education.gouv.fr/etre-assistant-de-service-social-11651"),
+"Ministère de l’Éducation nationale. (2022, 21 juillet). <i>MÉTIER assistante de service social en faveur des élèves</i> [Vidéo]. YouTube. "+A("https://www.youtube.com/watch?v=LMvc7KIKztw"),
+"Ministère de l’Éducation nationale. (2022, 21 juillet). <i>MÉTIER assistant de service social en faveur des personnels</i> [Vidéo]. YouTube. "+A("https://www.youtube.com/watch?v=SebBF40q_i4")],
+5:[
+"Crous de Montpellier. (s. d.). <i>Social et accompagnement</i>. "+A("https://www.crous-montpellier.fr/social-et-accompagnement/")]
+};
+Object.keys(P).forEach(i=>D[i].pl=P[i]);
+const J="<i>La Revue française de service social</i>",AS="<i>Actualités sociales hebdomadaires (ASH)</i>",LS="<i>Lien social</i>";
+const Q={
+5:["Démarches Administratives. (2026). <i>Étudiant en galère financière ? Découvre l’aide du Crous #crous #etudiant</i> [Vidéo]. YouTube. "+A("https://www.youtube.com/watch?v=zzewsRBZcd4")],
+6:[
+"Fourgeaud, É. (2024). En milieu hospitalier, créer les conditions du travail entre acteurs. "+J+", (292), 73-77.",
+"Gilhodes, M.-C. (2019). Prise en charge sociale d’un jeune étranger atteint d’une maladie chronique. <i>Cahiers de la puéricultrice</i>, (326), 27-29.",
+"Guardiola, I. (2010). Assistante sociale à l’hôpital : rempart d’humanité. <i>L’École des parents</i>, (587), 42-44.",
+"Loriente, C. (2020). Hôpital [Entretien avec C. Gabarro]. "+LS+", <i>1268</i>(5), 18-24. "+A("https://doi.org/10.3917/liso.1268.0018"),
+"Poujol, S. (2025). Action d’une assistante sociale en centre médico-psychologique pour enfants. "+J+", (296), 58-61."],
+7:[
+"Assistant de service social et équipe de santé mentale. (2020). <i>Pratiques en santé mentale</i> (66e année). "+A("https://shs.cairn.info/revue-pratique-en-sante-mentale-2020-4?lang=fr"),
+"Bompays, N., & Scordia, L. (2021). Donner du sens à l’intervention en psychiatrie : le rôle de la coordination de l’action sociale auprès des assistants sociaux de l’établissement public de santé (EPS) de Ville-Évrard. "+J+", (281), 12-19.",
+"Bonnet, C. (2021). <i>L’accompagnement en santé mentale</i>. érès. "+A("https://shs.cairn.info/l-accompagnement-en-sante-mentale--9782749270104?lang=fr"),
+"Laffaille, M., Bompays, N. (coord.), Aïdoud, M., Defrel, F., Édouard, M.-É., Le Pocreau, S., Neto, A., Pierron, C., Prevost, S., Sandron, É., Scordia, S., & Tonnelier, C. (2013). Les assistants sociaux en psychiatrie. <i>VST - Vie sociale et traitements</i>, (118), 114-120. "+A("https://doi.org/10.3917/vst.118.0114"),
+"Poupeau, D. (2021, 22 janvier). Santé mentale : des assistants de service social en renfort dans les universités. <i>Le Média Social</i>. "+A("https://www.lemediasocial.fr/sante-mentale-des-assistants-de-service-social-en-renfort-dans-les-universites_3ZumMq"),
+"Taube, R. (2024, 26 novembre). L’assistante sociale du travail face aux risques psychosociaux. "+AS+"."],
+8:[
+"Guillet, A. (2025). Le service social face au mal-être au travail : une intervention sociale incertaine. "+J+", (296), 12-19.",
+"Dubasque, D. (2024, 23 janvier). L’assistante sociale en entreprise, un métier d’avenir en pleine évolution. Didier Dubasque. "+A("https://dubasque.org/lassistante-sociale-en-entreprise-un-metier-davenir-en-pleine-evolution"),
+"Garsault, S., & Arrighy, P. (2025). Réforme des retraites : le rôle de l’assistant social du travail. "+J+", 296, 83-89.",
+"Giraud, L., Grebert, M., & Llopart, T. (2025). « Le travail, c’est la santé ». Le service social du travail à l’épreuve des évolutions sociétales. "+J+", (296), 20-24.",
+"Magagnosc, M. (2018). Professionnelle et militante : un engagement pour des valeurs. "+J+", (270), 100-104.",
+"Nahmias, M. (2026). Un rôle déterminant auprès des salariés. "+AS+", 3338, 32-33."],
+9:[
+"Fillod Chabaud, A., & Favre, L. (2025). Accompagner, intervenir, évaluer. <i>Vie sociale</i>, (49), 141-153.",
+"La parole de l’enfant. (2022). "+J+", (284), 52-55."],
+10:[
+"Ministère des Armées et des Anciens combattants. (2022, 21 février). <i>L’Action sociale des armées</i>. "+A("https://www.defense.gouv.fr/sga/au-service-agents/soutien-aux-blesses/guide-du-blesse/fiches-thematiques/laction-sociale-armees"),
+"SGA du ministère des Armées. (2021, 14 décembre). <i>Civils de la Défense : Sandra, assistante de service social des Armées</i> [Vidéo]. YouTube. "+A("https://www.youtube.com/watch?v=mhsBS9KjLho")],
+11:[
+"Fouda Essomba, V. S., & Cramer, R. (2023). Entrée en EHPAD : quel rôle pour les assistants de service social ? Certains préalables ne doivent-ils pas être déterminés en amont ? "+J+", (291), 82-90.",
+"Le Gall, J., & Ricard, M. (2023). Assistant social en Ehpad : une valeur ajoutée. "+AS+", (3304), 26-27.",
+"Lièvre, M. (2020). Les difficultés de l’accompagnement social. <i>Projet</i>, (376), 34-37.",
+"Onisep TV. (2026, janvier). <i>Assistante de service social dans un centre d’hébergement</i> [Vidéo]. Onisep TV. "+A("https://oniseptv.onisep.fr/video/assistante-de-service-social-centre-d-hebergement")],
+13:[
+"Fierdehaiche, M. (2021). Briser le silence, sortir de l’isolement. "+J+", (280), 76-79.",
+"Le Département de l’Hérault. (2024, 9 décembre). <i>Violences intrafamiliales : intervenantes sociales en commissariat et gendarmerie (ISCG)</i> [Vidéo]. YouTube. "+A("https://www.youtube.com/watch?v=VIdE_4BsX8E"),
+"Penna, A. (2019). Travail en commissariat : délicate alliance. "+LS+", (1249), 18-19.",
+"Prochasson, D. (2019). « Ne pas confondre missions sociale et sécuritaire ». "+AS+", (3106), 36-37."],
+14:[
+"HUMACITIA. (2023, 18 septembre). <i>Travail social en libéral : et pourquoi pas ? - Peggy DURAND, assistante de service social libérale</i> [Vidéo]. YouTube. "+A("https://www.youtube.com/watch?v=L0JmH5Gey1Q"),
+"Rio, E. (2015). Vous avez dit « service social libéral » ? Points de vue sur les questions de clientèle, déontologie, éthique. "+J+", (259), 124-127."]
+};
+const strip=s=>s.replace(/<[^>]+>/g,"");
+Object.keys(Q).forEach(i=>{D[i].pl=(D[i].pl||[]).concat(Q[i])});
+D.forEach(f=>{if(f.pl)f.pl.sort((a,b)=>strip(a).localeCompare(strip(b),"fr"))});
+document.getElementById("refs").innerHTML=RF.sort((a,b)=>a[0].localeCompare(b[0],"fr")).map(x=>'<p class="ref">'+x[1]+"</p>").join("");
+
+let cur="all";const seen=new Set();
+const bar=document.getElementById("bar"),grid=document.getElementById("grid"),prog=document.getElementById("prog");
+const dlg=document.getElementById("dlg");
+function chips(){bar.innerHTML="";for(const k in CATS){const b=document.createElement("button");b.className="chip";b.textContent=CATS[k];b.setAttribute("aria-pressed",k===cur);b.onclick=()=>{cur=k;chips();draw()};bar.appendChild(b)}}
+function draw(){grid.innerHTML="";D.forEach((f,i)=>{if(cur==="tem"?!f.w:cur!=="all"&&f.c!==cur)return;
+const b=document.createElement("button");b.className="card";
+b.innerHTML=(seen.has(i)?'<span class="seen">✓</span>':"")+'<div class="ico">'+f.e+'</div><h2></h2><p></p>'+(f.w?'<span class="tag">Témoignage</span>':"");
+b.querySelector("h2").textContent=f.t;b.querySelector("p").textContent=f.b.split(":")[0].slice(0,95)+"…";
+b.onclick=()=>open(i);grid.appendChild(b)});
+prog.textContent=seen.size+" champ(s) découvert(s) sur "+D.length}
+function esc(s){const d=document.createElement("div");d.textContent=s;return d.innerHTML}
+function open(i){const f=D[i];seen.add(i);
+document.getElementById("di").textContent=f.e;document.getElementById("dt").textContent=f.t;
+document.getElementById("dbody").innerHTML=
+"<p>"+esc(f.b)+"</p><h3>Public</h3><p>"+esc(f.p)+"</p><h3>Missions</h3><ul>"+f.m.map(x=>"<li>"+esc(x)+"</li>").join("")+"</ul>"+
+'<h3>Chiffre clé actualisé</h3><div class="key">'+esc(f.k)+(f.s?(f.s[1]?' <a href="'+f.s[1]+'" target="_blank" rel="noopener">'+esc(f.s[0])+"</a>":" "+esc(f.s[0])):"")+'<div class="note">Dans l’ouvrage : '+esc(f.ko)+"</div>"+(f.r?'<div class="note">'+esc(f.r)+"</div>":"")+"</div><h3>Textes de référence</h3><ul class=\"lex\">"+f.l.map(x=>'<li><a href="'+x[1]+'" target="_blank" rel="noopener">'+esc(x[0])+"</a></li>").join("")+"</ul>"+(f.ss?"<h3>Sources des chiffres et des missions</h3><ul class=\"lex\">"+f.ss.map(x=>x[1]?'<li><a href="'+x[1]+'" target="_blank" rel="noopener">'+esc(x[0])+"</a></li>":"<li>"+esc(x[0])+"</li>").join("")+"</ul>":"")+"<h3>Illustration : témoignage</h3>"+
+(f.w?'<div class="qt"><b>'+esc(f.w[0])+"</b>"+esc(f.w[1])+"</div>":'<p class="none">Pas de témoignage dans l’ouvrage pour ce champ.</p>')+
+(f.pl?'<h3>Pour en savoir plus…</h3><ul class="lex">'+f.pl.map(x=>"<li>"+x+"</li>").join("")+"</ul>":"")+'<p class="note">Source : Bouquet & Garcette (2014), chap. 5.</p>';
+dlg.showModal();draw()}
+document.getElementById("dx").onclick=()=>dlg.close();
+dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
+chips();draw();
+</script>
+</body>
+</html>
